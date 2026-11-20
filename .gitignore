@@ -1,0 +1,16 @@
+# Obsidian per-device UI state (changes constantly, causes merge conflicts)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspaces.json
+
+# Caches and trash
+.obsidian/cache
+.trash/
+
+# Obsidian Git plugin helper (generated per device)
+.obsidian/plugins/obsidian-git/obsidian_askpass.sh
+
+# OS clutter
+.DS_Store
+Thumbs.db
+desktop.ini
