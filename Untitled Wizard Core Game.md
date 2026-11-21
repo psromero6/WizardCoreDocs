@@ -8,10 +8,12 @@ This game seeks to be a Survival Craft game where the player will seek to progre
 
 The Feeling and visuals of this game are WIZARD CORE. The environment should feel whimsical in a fantasy way. The player is expected to die frequently but death will not be too punishing beyond loosing gear. 
 
+Gameplay is based on other Survival Craft games, namely Valheim where progression is based on unlocking biomes
+
 ## Gameplay Features
 
 ### Character Attributes
- ***Skills*** are things that the character does. Doing them increases a players skill. Having a skill gives bonuses with those actions. Mostly they reduce the stamina cost, but some can unlock passive abilities(TBD). Skills go from 1-100.
+ ***Skills*** are things that the character does. Doing them increases a players skill. Having a skill gives bonuses with those actions. Mostly they reduce the stamina cost, but some can unlock passive abilities(TBD). Skills go from 1-100. Anything that the player does that is NOT tied to a skill should be flagged for farther reveiw.
 #### Skills
 * Sword
 * Axe
@@ -34,7 +36,7 @@ The Feeling and visuals of this game are WIZARD CORE. The environment should fee
 * Health
 * Stamina
 * Focus
-* Fullness
+* Satiety
 * Movement Speed
 * Armor
 * Stamina Efficiency
@@ -44,39 +46,108 @@ The Feeling and visuals of this game are WIZARD CORE. The environment should fee
 * Health Regen
 * Stamina Regen
 * Focus Regen
-* Fullness Decline
+* Satiety Decline
   
 ## Things that Can effect the character
 All things that effect the character effect their stats. These should be applied like tags. Each will be visible on the players Hud. Some will effect the player camera via post process or other effect.
 ### Statuses
-* Rested
-* Sheltered
-* Wet
-* Cold
-* Burning
-* Shocked
-* Stunned
-* Frozen
-* Intoxicated
-* Hallucinating
-* Smoked
+* Rested - Bonus to stamina, health, and focus regen
+* Sheltered - No stat changes but allows for sleeping and resting
+* Wet - Penalty to Stamina Regen
+* Cold - Penalty to Stamina and Focus Regen
+* Hot - Penalty to Stamina and Focus Regen
+* Burning - Damage over time
+* Stunned - Slows movements and actions
+* Frozen - Stops movements and actions
+* Intoxicated - random input location drift, focus penalty, Toughness Bonus, Camera effect
+* High - Camera effect, focus penalty, meta effect for some spells
+* Hallucinating - Camera effect meta effect for environment and spells
+* Asphyxiated - Damage over time - caused by smoke some environment elements
 * (Leave room for more)
   
 ## Food
 A very important part of the game is food and cooking the player should consider what their next meal will be. Want to collect recipes and find/harvest/cultivate new ingredients.
 
-#### Fullness
-The player will have a fullness meter that declines over time
+### Eating
+#### Satiety
+The player will have a Satiety meter that declines over time
+
+#### Stay
+Each food item has a stay that determines how many *Ticks* a food item will last. Each tick all bonuses and Satiety decline relative to the ramaining stay/maxstay.ie
+  A carrot could have Satiety = 6, *All Bonuses* = 3, Stay =6. If we loose 1 Stay each 20 second tick, then after a minute we would  current Stay /max Stay = 3/6 so we would have a Satiety of 3 added, all bonuses of 1.5 
+  
+To eat food the player must have Satiety to eat the entire item
 
 #### Food Stats
-* Filling
-	Amount of fullness that gets added to the meter, determines duration of effects
+* Satiety
+	Amount of Satiety that gets added to the meter
+* Stay 
+	  How long does this effect last
 * Health Bonus
 * Stamina Bonus
 * Focus Bonus
+* Other Bonuses/Tags
+
   
-  Bonuses decay over time along with the fullness that item granted. ie
-  A carrot gives 10 fullness 5 Heath, Stamina and Focus. if you loose 1 fullness every 10 seconds 40 seconds you have 6 fullness, 3 of each bonus.
-  if you have multiple types of food granting you bonuses the fullness gets reduced equally from each food item so if you eat 3 carrots, after 40 seconds you have 18 fullness 9 of each bonus. EACH carrot will grant 6 fullness and 3 of each bonus. This means that more food means the effect decays slower.
+### Cooking
+
+#### Recipes
+Items can have a tag Ingredient, that ingredient will have sub-tags listed bellow. Placing matching tags into the recipe will allow the player to make that food. The stats of a produced item will be the sum of the ingredients * recipe modifiers for each stat + any bonus effects from the ingredients
+ Recipes are unlocked in a work station. More can be unlocked by upgrading a cook station.
+ Recipes should be stored in a Data Table with Name, Ingredient Tag Combo that supports optional ingredients, the stat modifier array, and crafting station to make, and crafting station level to unlock
+
+example: 
+	**Sandwich** = Bread + Protein + At Least one(Veggie + Cheese + Sauce) 
+			    Satiety= 0.5
+			     Stay = 2
+			     Health = 1.5
+			     Stamina = 1.5
+			     Focus = 1
+	Making a White bread(Satiety = 5 All stats =1 for simplicity) + Chicken( Satiety = 6 All Stats=5) and Carrot(Satiety = 6 All Stats =3)
+	 Resulting Chicken Carrot Sandwich = 
+		 Satiety = 8
+		 Stay = 18
+		 Health = 13.5
+		 Stamina = 13.5
+		 Focus = 9
+	 If the Carrot were to have a skill bonus or other effect then that would apply to the sandwich as well.
+#### Ingredient tags
+* Veggie
+* Bread
+* Starch
+* Protein
+* Fruit
+* Legume
+* Cheese
+* Oil
+* Sauce
+* Liquid
+* (Room for More)
+
+## Crafting and Building
+### Building
+Core to the gameplay Building will be done with a building tool, A hammer, or other equipped implement tagged with building tool. Equipping and opening a context menu that shows all known build recipes selecting the recipe will show a ghost version of the build. If the player has the required resources, either in an inventory or in a chest within build range they can immediately create the structure. Additionally, build recipes require a crafting station. Wood wall requires a workbench. Stone requires masonry station etc. 
+
+#### Build recipes
+Initially the player will have no recipes but as they collect items in the world keep track of what they picked up. when they have all required resources to craft a build piece they get a notification that that build recipe is unlocked. They need to have collected all required ingredients and have built the required workstation.
+#### Structure score
+To limit the height of builds a built piece needs to have structural integrity. When placing a build piece on any surface that surface Structure score is accounted for and the built piece has a score that is lower than the built score based on its structural strength(0-1) which gets set in a data table. If a placed piece is less than or equal to 0.1(Global variable that we can tune) after being placed it will break and drop its ingredients.
+For example a wooden wall has a structural strength of 0.7 so if placed on solid ground its Structural score is 0.7. A wall placed on top of it = 0.7*0.7 = 0.49. 
+
+This score should be visible to a player in build mode. When they are showing the ghost mesh of the piece they want to build. there should be a shader that highlights the base mesh and is Green for a solid base and Red for a weak one, with Yellow in between. 
+
+#### Vehicle Chassis
+A special kind of build piece is a vehicle chassis that can support SOME builds on top of it, but should be very limited. The best example of this will be the cart. It starts with its own structural integrity an can have other components added to it. The player can pull the cart themself or can build a yolk to attach to *tamed* creatures to apply power. They can be controlled via driver seat. Creatures will keep pulling and follow the clearest path in front of them if they are not being steered by the player. 
+
+### Crafting
+The player can build crafting stations and then interact with them, interacting will give them access to *Crafting recipes* that are items that when crafted are placed into the players inventory. This is how all food, weapons, armor, potions, and anything that can fit in an inventory that isn't a raw material is made.(Some are found in the world but those are special cases)
+
+All Items should have a recipe that links to a crafting station, or a place in the world it gets spawned or dropped. 
+
+#### Crafting Levels
+Crafting stations can be upgraded by building crafting upgrades that are build pieces in the world that cost resources, if they are in range of a crafting station they will increase the level of that station increasing the number of known recipes. 
+
+
   
-  
+## Combat
+The world will have hostile enemies in all biomes. Hand-hand combat will be the most common but the player will quickly be overwhelmed by more powerful enemies without spells, minions, summons, and   
