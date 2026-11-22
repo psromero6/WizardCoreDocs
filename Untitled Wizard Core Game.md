@@ -147,7 +147,18 @@ All Items should have a recipe that links to a crafting station, or a place in t
 #### Crafting Levels
 Crafting stations can be upgraded by building crafting upgrades that are build pieces in the world that cost resources, if they are in range of a crafting station they will increase the level of that station increasing the number of known recipes. 
 
+### Farming
+Many ingredients and raw food items can be grown in *plots*. A *seed* can be placed into a plot, if growing conditions are met. After some time, Demined by the seeds *growth time*  a crop matures and can be harvested. A crop drops ingredients at fixed drop rate when harvested.
 
-  
+#### Plots
+* Cultivated land --- Dirt that the player has *tilled* and is close to water
+* Pot --- Indoors functions like Cultivated land
+* Hydroponic pot --- Indoors, advanced and requires some magic. Bonus to some crops
+* Mushroom Bolt --- Will grow wood eating mushrooms
+* Spore Urn --- Will grow manure mushrooms
+
+## Taming
+
+
 ## Combat
-The world will have hostile enemies in all biomes. Hand-hand combat will be the most common but the player will quickly be overwhelmed by more powerful enemies without spells, minions, summons, and   
+The world will have hostile enemies in all biomes. The players main challenges will be to deal with more numerous and powerful foes.    
