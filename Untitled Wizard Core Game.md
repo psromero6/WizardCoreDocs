@@ -128,6 +128,8 @@ example:
 ### Building
 Core to the gameplay Building will be done with a building tool, A hammer, or other equipped implement tagged with building tool. Equipping and opening a context menu that shows all known build recipes selecting the recipe will show a ghost version of the build. If the player has the required resources, either in an inventory or in a chest within build range they can immediately create the structure. Additionally, build recipes require a crafting station. Wood wall requires a workbench. Stone requires masonry station etc. 
 
+#### Build sockets
+The Structures that the player builds should be able to lock together to give the feel of locking pieces together. Each build component will have sockets that can other build components can lock to with their sockets. We will give more control and features with building after the initial prototype 
 #### Build recipes
 Initially the player will have no recipes but as they collect items in the world keep track of what they picked up. when they have all required resources to craft a build piece they get a notification that that build recipe is unlocked. They need to have collected all required ingredients and have built the required workstation.
 #### Structure score
