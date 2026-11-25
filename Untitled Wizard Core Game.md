@@ -8,12 +8,29 @@ This game seeks to be a Survival Craft game where the player will seek to progre
 
 The Feeling and visuals of this game are WIZARD CORE. The environment should feel whimsical in a fantasy way. The player is expected to die frequently but death will not be too punishing beyond loosing gear. 
 
-Gameplay is based on other Survival Craft games, namely Valheim where progression is based on unlocking biomes
-
+Gameplay is based on other Survival Craft games, namely Valheim where progression is based on unlocking biomes. 
 ## Gameplay Features
+The game is a third person 3/4 perspective with an inventory and equip system. 
+We will want to make a simple character creator that matches the vibe, but will use a generic model at first
 
+### Inventory
+The player will have a grid of items that can be held along with a carry weight. Items in a hot bar that can be selected with number keys to equip which item is active and being used. If a player exceeds the max carry weight their movement speed will be severely reduced and all recovery rates of ANY stat drop to 0 until their carry weight goes down again. We will have a fixed carry weight but it can be manipulated with spells, potions, and some items.
+##### Equipping
+A character can equip clothes, weapons, tools, jewelry. Anything that one would expect from a survival craft game. Armor and weapons will need to be able to be added to the character. This being a wizard game we will need to keep in mind that the cloth physics on robes and hats will be considered carefully.  The character will have the following slots for armor and weapons
+* Hands (Left and Right)- Some weapons take both
+* Head - Hats/Helmets
+* Chest - Robes/Breastplate armor
+* Legs - Pants/Greaves
+* Feet - Shoes/Boots
+* Rigs(Left and Right Hand)
+* Amulet
+  
+An weapon or tool equipped in a Hand slot will be used by Right/Left click or Right left Trigger. Blocking with a shield in the offhand is L or Right click as an example
+  
+Activating an item in your inventory will 'Use' that item so it will drink the potion or equip the weapon(unequipping anything that might already be equipped).
+All worn or equipped items still count to the carry weight of the character.
 ### Character Attributes
- ***Skills*** are things that the character does. Doing them increases a players skill. Having a skill gives bonuses with those actions. Mostly they reduce the stamina cost, but some can unlock passive abilities(TBD). Skills go from 1-100. Anything that the player does that is NOT tied to a skill should be flagged for farther reveiw.
+ ***Skills*** are things that the character does. Doing them increases a players skill. Having a skill gives bonuses with those actions. Mostly they reduce the stamina cost, but some can unlock passive abilities(TBD). Skills go from 1-100. Anything that the player does that is NOT tied to a skill should be flagged for farther review.
 #### Skills
 * Sword
 * Axe
