@@ -139,7 +139,16 @@ For example a wooden wall has a structural strength of 0.7 so if placed on solid
 This score should be visible to a player in build mode. When they are showing the ghost mesh of the piece they want to build. there should be a shader that highlights the base mesh and is Green for a solid base and Red for a weak one, with Yellow in between. 
 
 #### Vehicle Chassis
-A special kind of build piece is a vehicle chassis that can support SOME builds on top of it, but should be very limited. The best example of this will be the cart. It starts with its own structural integrity an can have other components added to it. The player can pull the cart themself or can build a yolk to attach to *tamed* creatures to apply power. They can be controlled via driver seat. Creatures will keep pulling and follow the clearest path in front of them if they are not being steered by the player. 
+A special kind of build piece is a vehicle chassis that can support SOME builds on top of it, but should be very limited. The best example of this will be the cart. It starts with its own structural integrity an can have other components added to it. The player can pull the cart themself or can build a yoke to attach to *tamed* creatures to apply power. They can be controlled via driver seat. Creatures will keep pulling and follow the clearest path in front of them if they are not being steered by the player. 
+##### Types of vehicles
+* Cart - Pulled by animals with yokes. Allows building on
+* Plow - pulled by animals tills fields very efficiently
+* Sled - pulled by animals major movement bonus on snow
+* Rowboat - small boat manual labor required
+* Sailboat - small boat uses the wind to maneuver
+* Galley - medium boat, difficult to use alone, uses wind to maneuver - Allows building on
+* Hot air balloon - burns fuel to rise, flies, pushed by wind
+* Mechanical legs - burns COAL to move, higher tech(Expensive) - allows building on
 
 ### Crafting
 The player can build crafting stations and then interact with them, interacting will give them access to *Crafting recipes* that are items that when crafted are placed into the players inventory. This is how all food, weapons, armor, potions, and anything that can fit in an inventory that isn't a raw material is made.(Some are found in the world but those are special cases)
@@ -160,7 +169,62 @@ Many ingredients and raw food items can be grown in *plots*. A *seed* can be pla
 * Spore Urn --- Will grow manure mushrooms
 
 ## Taming
+Animals with a *tamable* tag can be tamed. to tame an animal they must be *Happy* and within a player tick. That increases their *Tame score* once a wild creatures tame score goes from 0 to 100 they are tamed. A creature that is bred from two tamable creatures is tame.
 
+Tamable creatures states:
+* Happy
+* Afraid
+* Hungry
+  
+Tamable creatures will have an item list of items they will eat.
+
+##### Tamable creature templates
+* Passives (Chicken, Quail, Dove)
+	* Non aggressive
+	* Drop Eggs
+	* Ok drops on death
+	* Easy to breed/maintain
+	* Cannot be attached to Saddle or Yoke
+* Passive Bovine(goat, alpaca, cow)
+	* Non aggressive
+	* Provide drop when interacted with proper tool
+	* Some have valuable drops on death
+	* Can attach Yoke(L1)
+	* Cannot attach Saddle
+* Burden/Mount(Horse, Mule, Camel, Ostridge)
+	* Non aggressive
+	* very cheap/non beneficial drops on death
+	* Attach Yoke(L2)
+	* Attach Saddle
+* Large Burden(Buffalo, Ox)
+	* non aggressive
+	* High drops on death
+	* Attach yoke L3
+	* Attach Saddle
+* Flying( magpie,Raven, Owl)
+	* Non aggressive
+	* Poor drops on death
+	* Provides passive loot
+	* Intended for familiars
+* Guards(Wolf, Dog, Cougar)
+	* Aggressive
+	* Medium drop on death
+	* Attach Yoke(L2)
+	* Cannot attach Saddle
+	* Defends player
+* Large Guard - Bear
+	* Aggressive
+	* Defends player
+	* High drops on death
+	* Attach Yoke (L3)
+	* Attach Saddle
+For the initial prototype with will have one of each category. The first listed in the parens is what I intend to start with.
+
+### Equipment for Animals
+#### Yoke
+Attached to a animal a Yoke allows for a creature to be attached to a vehicle and pull it. Yokes L1-L3 determine how much force is applied to the vehicle/cart and how much stamina each creature has
+#### Saddle
+Attach to an animal to make them a mount. They are their own vehicle and can be ridden.
 
 ## Combat
 The world will have hostile enemies in all biomes. The players main challenges will be to deal with more numerous and powerful foes.    
